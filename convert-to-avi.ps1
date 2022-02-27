@@ -7,7 +7,7 @@ foreach ($inputPath in $args) {
   $item = Get-Item $inputPath
   $baseName = $item.BaseName
   $directory = $item.DirectoryName
-  $outputPath = Join-Path $directory "$baseName.avi"
-  ffmpeg.exe -y -i $inputPath $outputPath
+  $outputPath = Join-Path $directory "$baseName-processed.mp4"
+  ffmpeg.exe -y -i $inputPath -vcodec h264 -s 1024:576 -ar 44100 $outputPath
 }
 Write-Output "Completed."
